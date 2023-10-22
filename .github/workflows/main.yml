@@ -31,8 +31,8 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t zafarassidiq/fe-dumbmerch .
-        docker push zafarassidiq/fe-dumbmerch
+        docker build -t zafarassidiq/be-dumbmerch .
+        docker push zafarassidiq/be-dumbmerch
         
     - name: SSH Deploy
       uses: appleboy/ssh-action@master
@@ -41,5 +41,5 @@ jobs:
         username: appser
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /home/appser/fe-dumbmerch
+          cd /home/appser/be-dumbmerch
           docker compose up -d
