@@ -1,6 +1,9 @@
-FROM golang:1.18-alpine
-WORKDIR /app
+FROM golang:1.16.7-alpine AS staging
+WORKDIR /usr/src/app
 COPY . .
-RUN go build -o /dumbmerch
+
+FROM golang:1.16.7-alpine AS production
+WORKDIR /home/root
+COPY --from=staging /usr/src/app /home/root
 EXPOSE 5000
-CMD [ "/dumbmerch" ]
+CMD ["go", "run", "main.go"]
